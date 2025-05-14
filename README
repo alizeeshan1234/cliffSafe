@@ -1,0 +1,70 @@
+# ⛓️ CliffSafe – Secure Token Vesting on Solana
+
+CliffSafe is a decentralized token vesting protocol built on **Solana** using **Anchor**. It enables teams, DAOs, and projects to securely lock and release SPL tokens based on customizable **cliff** or **linear** vesting schedules — all enforced on-chain.
+
+> 🎯 Submitted for the [Colosseum Solana Hackathon](https://colosseum.org)
+
+---
+
+## 🚀 Why CliffSafe?
+
+Many protocols need to distribute tokens over time — for investors, founders, contributors, and partners. Doing this securely and transparently is critical.
+
+**Problems with existing approaches:**
+- Manual unlocks with centralized control
+- Risk of early token dumping
+- Lack of transparency for recipients
+
+**CliffSafe solves this with:**
+- Fully on-chain logic
+- No trusted intermediaries
+- Support for both cliff and linear schedules
+- Compatible with any SPL token
+
+---
+
+## 🔧 Features
+
+- 🔒 **Cliff Vesting**: Tokens unlock 100% after a cliff period
+- 📈 **Linear Vesting**: Tokens unlock gradually over time
+- ⏱️ **Custom Schedules**: Set start time, duration, cliff period
+- 🔁 **Claim Anytime**: Beneficiaries can claim vested tokens when eligible
+- 🧱 **SPL Support**: Works with all SPL tokens
+- 🔐 **PDA Vaults**: Secure escrow via Anchor’s Program Derived Addresses
+
+---
+
+## 🧠 Architecture Overview
+
+When a vesting schedule is created:
+1. Tokens are sent to a **vault PDA**
+2. Vesting metadata is stored in a `VestingAccount`
+3. The beneficiary can call `claim()` based on time elapsed
+4. Tokens are transferred from the vault to the recipient
+
+### On-Chain Accounts
+
+| Account          | Purpose                            |
+|------------------|------------------------------------|
+| `VestingAccount` | Stores config: type, timing, etc.  |
+| `TokenVault`     | PDA holding the locked SPL tokens  |
+| `Beneficiary`    | Can claim vested tokens            |
+| `TokenMint`      | The SPL token being vested         |
+
+---
+
+## ⚙️ Setup Instructions
+
+### ✅ Prerequisites
+
+- Rust + Cargo  
+- [Solana CLI](https://docs.solana.com/cli/install-solana-cli)  
+- [Anchor CLI](https://www.anchor-lang.com/docs/installation)  
+- Node.js (for test runner)
+
+### 📥 Clone & Install
+
+```bash
+git clone https://github.com/alizeeshan1234/cliffSafe.git
+cd cliffSafe
+npm install
