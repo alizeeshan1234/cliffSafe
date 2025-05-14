@@ -68,3 +68,98 @@ When a vesting schedule is created:
 git clone https://github.com/alizeeshan1234/cliffSafe.git
 cd cliffSafe
 npm install
+
+🧾 On-Chain Instructions
+These are the core instructions (transactions) that interact with the CliffSafe program. Each instruction allows users or administrators to perform specific actions on the vesting contract.
+
+1. 🔧 initialize_vesting
+Purpose:
+This instruction initializes a new vesting contract for a company or project, setting up the VestingAccount and allowing token deposits to be securely stored.
+
+How it works:
+
+The contract is created for a specific company, and tokens will be locked into a secure vault.
+
+You can define whether the vesting schedule is revocable by an administrator.
+
+Usage:
+Used by administrators or project creators to set up a vesting contract.
+
+2. 🧍 initialize_beneficiary
+Purpose:
+Registers a new beneficiary under the vesting contract, providing them with a specific amount of tokens according to a defined vesting schedule.
+
+How it works:
+
+The beneficiary will receive tokens according to either Cliff Vesting or Linear Vesting.
+
+The schedule includes a cliff period (time before any tokens are unlocked) and a vesting duration (total time for the tokens to be fully unlocked).
+
+Beneficiaries can claim their tokens as they become eligible.
+
+Usage:
+Used by project administrators to assign tokens to an individual beneficiary.
+
+3. 🎯 initialize_beneficiary_ata
+Purpose:
+This instruction creates an Associated Token Account (ATA) for the beneficiary if they don’t already have one. It ensures that the beneficiary has an account to receive and claim their vested tokens.
+
+How it works:
+
+Ensures the beneficiary’s wallet is prepared to receive the locked tokens by creating the appropriate ATA.
+
+Usage:
+Called after initializing the beneficiary to ensure they can properly receive tokens.
+
+4. 💰 deposit_tokens
+Purpose:
+Deposits tokens into the vesting contract’s Vault on behalf of the company.
+
+How it works:
+
+Tokens are deposited into the Vault and held there until the beneficiary can claim them.
+
+The contract will ensure that the total tokens deposited match the vesting requirements.
+
+Usage:
+Used by the company or project to fund the vesting contract with SPL tokens.
+
+5. 🪙 mint_tokens
+Purpose:
+Mints new tokens and adds them to the vesting contract’s Vault.
+
+How it works:
+
+The minted tokens are locked in the vault, awaiting distribution to beneficiaries based on the vesting schedule.
+
+This is useful for projects or DAOs that need to create new tokens for distribution.
+
+Usage:
+Used when additional tokens need to be created and added to the vesting contract.
+
+6. 🏆 claim_tokens
+Purpose:
+Allows the beneficiary to claim their vested tokens.
+
+How it works:
+
+Beneficiaries can claim their vested tokens according to the defined schedule.
+
+Tokens can only be claimed if the vesting conditions are met (e.g., after the cliff period or based on the elapsed time in linear vesting).
+
+Usage:
+Used by the beneficiary to claim unlocked tokens.
+
+7. ❌ revoke_vesting
+Purpose:
+Revokes a vesting contract, preventing further vesting and claims for a specific company.
+
+How it works:
+
+The revocation will stop further vesting, but previously unlocked tokens remain claimable.
+
+The company or project admin can cancel vesting schedules if needed.
+
+Usage:
+Used by administrators to revoke a vesting contract if necessary.
+
