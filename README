@@ -114,6 +114,7 @@ Called after initializing the beneficiary to ensure they can properly receive to
 4. 💰 deposit_tokens
 Purpose:
 Deposits tokens into the vesting contract’s Vault on behalf of the company.
+This instruction allows the company to deposit pre minted tokens into the vault.
 
 How it works:
 
